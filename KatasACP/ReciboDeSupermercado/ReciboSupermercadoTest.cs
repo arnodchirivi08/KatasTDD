@@ -54,7 +54,23 @@ namespace Katas.ReciboDeSupermercado
             var unidad = 1;
             var valorUnidad = 2.49m;
             var valorDescuento = 0.10m;
-            var costoTotal = Math.Round(valorUnidad * (1 - valorDescuento), 2);
+            var valorSinDescuento = unidad * valorUnidad;
+            var costoTotal = Math.Round(valorSinDescuento * (1 - valorDescuento), 2);
+            var descripcionProducto = "Arroz";
+            var reciboSuper = new ReciboSupermercadoJ();
+
+            reciboSuper.CalcularCostoTotal(unidad, valorUnidad, descripcionProducto).Should().Be(costoTotal);
+        }
+
+        [Fact]
+
+        public void Debe_CalcularCostoTotal_CuandoElProductoSonDosBolsasDeArrozConPrecioDe2_49CadaUnoYDescuentoDel10Porciento_DevuelveElTotalConDescuentoDe4_48()
+        {
+            var unidad = 2;
+            var valorUnidad = 2.49m;
+            var valorDescuento = 0.10m;
+            var valorSinDescuento = unidad * valorUnidad;
+            var costoTotal = Math.Round(valorSinDescuento * (1 - valorDescuento), 2);
             var descripcionProducto = "Arroz";
             var reciboSuper = new ReciboSupermercadoJ();
 
