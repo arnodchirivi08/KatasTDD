@@ -13,21 +13,34 @@ namespace Katas.ReciboDeSupermercado
             var reciboSuper = new ReciboSupermercadoJ();
             //Act
 
+            //Assert
+            reciboSuper.CalcularCostoTotal(2, 0.99m).Should().Be(costoTotal);
+        }
+
+        [Fact]
+        public void Debe_CalcularCostoTotal_DevolveElvalorTotalDe3UnidadesDeCepillosPor1_98_Euros()
+        {
+            //Arrange
+            var unidades = 3;
+            var valorUnidad = 0.99m;
+            var costoTotal = 1.98m;
+            var reciboSuper = new ReciboSupermercadoJ();
+            //Act
 
             //Assert
-            reciboSuper.CalcularCostoTotal().Should().Be(costoTotal);
+            reciboSuper.CalcularCostoTotal(unidades, valorUnidad).Should().Be(costoTotal);
         }
     }
 
-    internal class ReciboSupermercadoJ
+    public class ReciboSupermercadoJ
     {
         public ReciboSupermercadoJ()
         {
         }
 
-        public object CalcularCostoTotal()
+        public decimal CalcularCostoTotal(int unidades, decimal valorUnidad)
         {
-            throw new NotImplementedException();
+            return 0.99m;
         }
     }
 }
