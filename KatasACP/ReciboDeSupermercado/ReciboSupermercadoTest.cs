@@ -120,6 +120,20 @@ namespace Katas.ReciboDeSupermercado
         }
 
 
+        //Cinco tubos de pasta de dientes por 7,49 €, precio normal 1,79 €.
+        [Fact]
+        public void Debe_CalcularCostoTotal_CuandoElProductoSeaTubosDePastaDeDientesYSeAgregue2_DevuelveElTotalDe3_58()
+        {
+            var unidades = 3;
+            var valorUnidad = 1.79m;
+            var valorEsperadoTotal = valorUnidad * unidades;
+            var descripcionProducto = "Tubo de pasta de dientes";
+            var reciboSuper = new ReciboSupermercadoJ();
+
+            reciboSuper.CalcularCostoTotal(unidades, valorUnidad, descripcionProducto).Should().Be(valorEsperadoTotal);
+        }
+
+
     }
 
     public class ReciboSupermercadoJ
