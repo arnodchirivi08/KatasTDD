@@ -14,7 +14,7 @@ namespace Katas.ReciboDeSupermercado
             //Act
 
             //Assert
-            reciboSuper.CalcularCostoTotal(2, 0.99m, "Unidad").Should().Be(costoTotal);
+            reciboSuper.CalcularCostoTotal(2, 0.99m, "Cepillo").Should().Be(costoTotal);
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace Katas.ReciboDeSupermercado
             //Act
 
             //Assert
-            reciboSuper.CalcularCostoTotal(unidades, valorUnidad, "Unidad").Should().Be(costoTotal);
+            reciboSuper.CalcularCostoTotal(unidades, valorUnidad, "Cepillo").Should().Be(costoTotal);
         }
 
         //20 % de descuento en manzanas, precio normal 1,99 € por kilo.
@@ -38,10 +38,10 @@ namespace Katas.ReciboDeSupermercado
             var unidad = 1;
             var valorUnidad = 1.99m;
             var costoTotal = 1.59m;
-            var tipoUnidad = "Kilo";
+            var descripcionProducto = "Manzanas";
             var reciboSuper = new ReciboSupermercadoJ();
 
-            reciboSuper.CalcularCostoTotal(unidad, valorUnidad, tipoUnidad).Should().Be(costoTotal);
+            reciboSuper.CalcularCostoTotal(unidad, valorUnidad, descripcionProducto).Should().Be(costoTotal);
         }
     }
 
@@ -51,11 +51,24 @@ namespace Katas.ReciboDeSupermercado
         {
         }
 
-        public decimal CalcularCostoTotal(int unidades, decimal valorUnidad, string tipoUnidad)
+        public decimal CalcularCostoTotal(int unidades, decimal valorUnidad, string descripcionProducto)
         {
-            var unidadesApagar = unidades - (unidades / 2);
-            var totalCostoConDescuento2X1 = unidadesApagar * valorUnidad;
-            return totalCostoConDescuento2X1;
+
+            if(descripcionProducto == "Cepillo")
+            {
+                var unidadesApagar = unidades - (unidades / 2);
+                var totalCostoConDescuento2X1 = unidadesApagar * valorUnidad;
+                return totalCostoConDescuento2X1;
+            }
+
+            if(descripcionProducto == "Manzanas")
+            {
+                var porcentajeDescuento = 0.2m;
+                var totalConDescuento = valorUnidad * (1 - porcentajeDescuento);
+                return Math.Round(totalConDescuento, 2);
+            }
+
+            return 0;
         }
     }
 }
