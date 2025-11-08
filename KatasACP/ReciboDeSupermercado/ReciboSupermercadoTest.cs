@@ -40,7 +40,9 @@ namespace Katas.ReciboDeSupermercado
 
         public decimal CalcularCostoTotal(int unidades, decimal valorUnidad)
         {
-            return 0.99m;
+            var unidadesApagar = unidades - (unidades / 2);
+            var totalCostoConDescuento2X1 = unidadesApagar * valorUnidad;
+            return totalCostoConDescuento2X1;
         }
     }
 }
