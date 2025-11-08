@@ -76,7 +76,7 @@ namespace Katas.ReciboDeSupermercado
         //Preciso en enunciado
         //10 % de descuento en arroz, precio normal 2,49 € por bolsa.
         [Fact]
-      
+
         public void Debe_CalcularCostoTotal_CuandoElProductoEsArrozConPrecioDe2_49YDescuentoDel10Porciento_DevuelveElTotalConDescuentoDe2_24()
         {
             var unidad = 1;
@@ -145,38 +145,48 @@ namespace Katas.ReciboDeSupermercado
         public decimal CalcularCostoTotal(int unidades, decimal valorUnidad, string descripcionProducto)
         {
 
-            if(descripcionProducto == "Cepillo")
+            switch (descripcionProducto)
             {
-                var unidadesApagar = unidades - (unidades / 2);
-                var totalCostoConDescuento2X1 = unidadesApagar * valorUnidad;
-                return totalCostoConDescuento2X1;
+                case "Cepillo":
+                    {
+                        return CalcularTotalConDescuento2x1(unidades, valorUnidad);
+                    }
+                case "Manzanas":
+                    {
+                        return CalcularTotalConPorcentajeDeDescuento(unidades, valorUnidad, 0.2m);
+                    }
+                case "Arroz":
+                    {
+                        return CalcularTotalConPorcentajeDeDescuento(unidades, valorUnidad, 0.1m);
+                    }
+                case "Tubo de pasta de dientes":
+                    {
+                        if (unidades == 5)
+                            return 7.49m;
+                        return CalcularTotalSinDescuento(unidades, valorUnidad);
+                    }
+                default:
+                    return CalcularTotalSinDescuento(unidades, valorUnidad);
             }
+        }
 
-            if(descripcionProducto == "Manzanas")
-            {
-                var porcentajeDescuento = 0.2m;
-                var totalSinDescuento = valorUnidad * unidades;
-                var totalConDescuento = totalSinDescuento * (1 - porcentajeDescuento);
-                return Math.Round(totalConDescuento, 2);
-            }
+        private decimal CalcularTotalConDescuento2x1(int unidades, decimal valorUnidad)
+        {
+            var unidadesApagar = unidades - (unidades / 2);
+            var totalCostoConDescuento2X1 = unidadesApagar * valorUnidad;
+            return totalCostoConDescuento2X1;
+        }
 
-            if(descripcionProducto == "Arroz")
-            {
-                var porcentajeDescuento = 0.1m;
-                var totalSinDescuento = unidades * valorUnidad;
-                var totalConDescuento = totalSinDescuento * (1 - porcentajeDescuento);
-                return Math.Round(totalConDescuento, 2);
-            }
+        private decimal CalcularTotalSinDescuento(int unidades, decimal valorUnidad)
+        {
+            return unidades * valorUnidad;
+        }
 
-            if (descripcionProducto == "Tubo de pasta de dientes")
-            {
-                if(unidades== 5)
-                 return 7.49m;
-
-                return unidades * valorUnidad;
-            }
-
-            return 0;
+        private decimal CalcularTotalConPorcentajeDeDescuento(int unidades, decimal valorUnidad, decimal porcentajeDescuento)
+        {
+            var totalSinDescuento = valorUnidad * unidades;
+            var totalConDescuento = totalSinDescuento * (1 - porcentajeDescuento);
+            return Math.Round(totalConDescuento, 2);
         }
     }
 }
