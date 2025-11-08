@@ -31,6 +31,20 @@ namespace Katas.ReciboDeSupermercado
             reciboSuper.CalcularCostoTotal(unidades, valorUnidad, "Cepillo").Should().Be(costoTotal);
         }
 
+        [Fact]
+        public void Debe_CalcularCostoTotal_CuandoElProductoSonCepillosConPrecioDe0_99YSeAgreganAlCarro5Cepillos_De2x1_DevuelveElTotalConDescuentoDe2_97()
+        {
+            //Arrange
+            var unidades = 5;
+            var valorUnidad = 0.99m;
+            var costoTotal = 2.97m;
+            var reciboSuper = new ReciboSupermercadoJ();
+            //Act
+
+            //Assert
+            reciboSuper.CalcularCostoTotal(unidades, valorUnidad, "Cepillo").Should().Be(costoTotal);
+        }
+
         //20 % de descuento en manzanas, precio normal 1,99 € por kilo.
         [Fact]
         public void Debe_CalcultarCostoTotal_DevolverElValorTotalDeUnKiloDeManzanasPor_1_59_Euros()
@@ -43,6 +57,20 @@ namespace Katas.ReciboDeSupermercado
 
             reciboSuper.CalcularCostoTotal(unidad, valorUnidad, descripcionProducto).Should().Be(costoTotal);
         }
+
+        //20 % de descuento en manzanas, precio normal 1,99 € por kilo.
+        [Fact]
+        public void Debe_CalcularCostoTotal_CuandoElProductoSea2BolsasDeManzanasConPrecioDe1_99CadaBolsaYUnDescuentoDel20Porciento_DevuelveElTotalConDescuentoDe3_18()
+        {
+            var unidad = 2;
+            var valorUnidad = 1.99m;
+            var costoTotal = 3.18m;
+            var descripcionProducto = "Manzanas";
+            var reciboSuper = new ReciboSupermercadoJ();
+
+            reciboSuper.CalcularCostoTotal(unidad, valorUnidad, descripcionProducto).Should().Be(costoTotal);
+        }
+
 
 
         //Preciso en enunciado
@@ -76,6 +104,9 @@ namespace Katas.ReciboDeSupermercado
 
             reciboSuper.CalcularCostoTotal(unidad, valorUnidad, descripcionProducto).Should().Be(costoTotal);
         }
+
+
+        //Cinco tubos de pasta de dientes por 7,49 €, precio normal 1,79 €.
     }
 
     public class ReciboSupermercadoJ
@@ -97,13 +128,17 @@ namespace Katas.ReciboDeSupermercado
             if(descripcionProducto == "Manzanas")
             {
                 var porcentajeDescuento = 0.2m;
-                var totalConDescuento = valorUnidad * (1 - porcentajeDescuento);
+                var totalSinDescuento = valorUnidad * unidades;
+                var totalConDescuento = totalSinDescuento * (1 - porcentajeDescuento);
                 return Math.Round(totalConDescuento, 2);
             }
 
             if(descripcionProducto == "Arroz")
             {
-                return 2.24m;
+                var porcentajeDescuento = 0.1m;
+                var totalSinDescuento = unidades * valorUnidad;
+                var totalConDescuento = totalSinDescuento * (1 - porcentajeDescuento);
+                return Math.Round(totalConDescuento, 2);
             }
 
             return 0;
