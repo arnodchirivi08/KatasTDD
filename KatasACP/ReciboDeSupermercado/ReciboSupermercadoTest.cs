@@ -216,14 +216,25 @@ namespace Katas.ReciboDeSupermercado
                     }
                 case "Cajas de tomates":
                     {
-                        if (unidades % 2 == 0)
-                        {
-                            return (unidades / 2) * 0.99m;
-                        }
-                        return 0.99m;
+                        return CalcularTotalPorDosCajas(unidades);
+
                     }
                 default:
                     return CalcularTotalSinDescuento(unidades, valorUnidad);
+            }
+        }
+
+        private decimal CalcularTotalPorDosCajas(int unidades)
+        {
+            if (unidades % 2 == 0)
+            {
+                return (unidades / 2) * 0.99m;
+            }
+            else
+            {
+                var valorTotalPorParesDeCajas = (unidades / 2) * 0.99m;
+                var valorTotalRestante = 1 * 0.69m;
+                return valorTotalPorParesDeCajas + valorTotalRestante;
             }
         }
 
