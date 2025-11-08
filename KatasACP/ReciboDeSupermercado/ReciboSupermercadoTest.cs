@@ -30,6 +30,18 @@ namespace Katas.ReciboDeSupermercado
             //Assert
             reciboSuper.CalcularCostoTotal(unidades, valorUnidad).Should().Be(costoTotal);
         }
+
+        //20 % de descuento en manzanas, precio normal 1,99 € por kilo.
+        [Fact]
+        public void Debe_CalcultarCostoTotal_DevolverElValorTotalDeUnKiloDeManzanasPor_1_59_Euros()
+        {
+            var unidad = 1;
+            var valorUnidad = 1.99m;
+            var costoTotal = 1.59m;
+            var reciboSuper = new ReciboSupermercadoJ();
+
+            reciboSuper.CalcularCostoTotal(unidad, valorUnidad).Should().Be(costoTotal);
+        }
     }
 
     public class ReciboSupermercadoJ
