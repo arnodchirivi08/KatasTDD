@@ -179,6 +179,10 @@ namespace Katas.ReciboDeSupermercado
                             return 7.49m;
                         return CalcularTotalSinDescuento(unidades, valorUnidad);
                     }
+                case "Cajas de tomates":
+                    {
+                        return 0.99m;
+                    }
                 default:
                     return CalcularTotalSinDescuento(unidades, valorUnidad);
             }
