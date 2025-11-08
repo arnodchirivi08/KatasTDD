@@ -170,7 +170,10 @@ namespace Katas.ReciboDeSupermercado
 
             if (descripcionProducto == "Tubo de pasta de dientes")
             {
-                return 7.49m;
+                if(unidades== 5)
+                 return 7.49m;
+
+                return unidades * valorUnidad;
             }
 
             return 0;
