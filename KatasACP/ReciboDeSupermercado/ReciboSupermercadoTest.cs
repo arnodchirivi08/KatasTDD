@@ -43,6 +43,23 @@ namespace Katas.ReciboDeSupermercado
 
             reciboSuper.CalcularCostoTotal(unidad, valorUnidad, descripcionProducto).Should().Be(costoTotal);
         }
+
+
+        //Preciso en enunciado
+        //10 % de descuento en arroz, precio normal 2,49 € por bolsa.
+        [Fact]
+      
+        public void Debe_CalcularCostoTotal_CuandoElProductoEsArrozConPrecioDe2_49YDescuentoDel10Porciento_DevuelveElTotalConDescuentoDe2_24()
+        {
+            var unidad = 1;
+            var valorUnidad = 2.49m;
+            var valorDescuento = 0.10m;
+            var costoTotal = Math.Round(valorUnidad * (1 - valorDescuento), 2);
+            var descripcionProducto = "Arroz";
+            var reciboSuper = new ReciboSupermercadoJ();
+
+            reciboSuper.CalcularCostoTotal(unidad, valorUnidad, descripcionProducto).Should().Be(costoTotal);
+        }
     }
 
     public class ReciboSupermercadoJ
