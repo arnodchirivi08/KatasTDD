@@ -147,6 +147,19 @@ namespace Katas.ReciboDeSupermercado
             reciboSuper.CalcularCostoTotal(unidades, valorUnidad, descripcionProducto).Should().Be(valorEsperadoPorDosCajas);
         }
 
+        [Fact]
+        public void Debe_CalcularCostoTotal_CuandoElProductoSeaCajaDeTomatesConPrecioDe0_69PorCadaDosCajas_YSeAgregueAlCarro6CajasDevolver_2_97_Euros()
+        {
+            var unidades = 6;
+            var valorUnidad = 0.69m;
+            var valorPorDosCajasDescuento = 0.99m;
+            var valorEsperadoPorDosCajas = (unidades / 2) * valorPorDosCajasDescuento;
+            var descripcionProducto = "Cajas de tomates";
+            var reciboSuper = new ReciboSupermercadoJ();
+
+            reciboSuper.CalcularCostoTotal(unidades, valorUnidad, descripcionProducto).Should().Be(valorEsperadoPorDosCajas);
+        }
+
 
     }
 
