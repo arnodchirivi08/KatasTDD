@@ -134,6 +134,20 @@ namespace Katas.ReciboDeSupermercado
         }
 
 
+        //Dos cajas de tomates cherry por 0,99 €, precio normal 0,69 € por caja
+        [Fact]
+        public void Debe_CalcularCostoTotal_CuandoElProductoSeaCajaDeTomatesYSeAgregan2CajasDevolveElTotalDe0_99()
+        {
+            var unidades = 2;
+            var valorUnidad = 0.69m;
+            var valorEsperadoPorDosCajas = 0.99m;
+            var descripcionProducto = "Cajas de tomates";
+            var reciboSuper = new ReciboSupermercadoJ();
+
+            reciboSuper.CalcularCostoTotal(unidades, valorUnidad, descripcionProducto).Should().Be(valorEsperadoPorDosCajas);
+        }
+
+
     }
 
     public class ReciboSupermercadoJ
